@@ -1,0 +1,21 @@
+elements:
+  what_we_do:
+    locator: "div:has-text('What We Do'):not(:has(div))"
+    expected_text: "What We Do"
+    description: "What We Do navigation link"
+  
+  who_we_are:
+    locator: "div:has-text('Who We Are'):not(:has(div))"
+    expected_text: "Who We Are"
+    description: "Who We Are navigation link"
+  
+  contact:
+    locator: "a:has-text('Contact')"
+    expected_text: "Contact"
+    description: "Contact navigation link"
+  
+  careers:
+    locator: "div:has-text('Careers'):not(:has(div))"
+    expected_text: "Careers"
+    description: "Careers navigation link"
+
