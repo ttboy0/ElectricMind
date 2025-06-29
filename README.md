@@ -1,24 +1,8 @@
-# Playwright TypeScript Automation Scripts - Electric Mind
+# Electric Mind Playwright Automation Scripts
 
-This project contains TypeScript-based Playwright automation scripts for testing the Electric Mind website. The scripts validate the presence of 4 key elements on the website and provide detailed reporting.
+This project contains both **Python** and **TypeScript** Playwright automation scripts for testing the Electric Mind website (https://www.electricmind.com/). Both versions provide identical functionality and validate the presence of 4 key elements on the website.
 
-## 📁 Project Structure
-
-```
-electricmind_scripts_typescript/
-├── common/
-│   └── lib.ts                # Common functions and PlaywrightManager class
-├── settings/
-│   └── settings.ts           # Global configuration settings
-├── Locators/
-│   └── locator.yaml          # Element locators and expected values
-├── main_script.ts            # Main execution script
-├── package.json              # Node.js dependencies and scripts
-├── tsconfig.json             # TypeScript configuration
-└── README.md                # This file
-```
-
-## 🎯 What This Script Does
+## 🎯 What These Scripts Do
 
 1. **Opens Browser**: Launches a Chromium browser instance
 2. **Navigates to URL**: Goes to https://www.electricmind.com/
@@ -26,71 +10,115 @@ electricmind_scripts_typescript/
    - What We Do navigation link
    - Who We Are navigation link  
    - Contact navigation link
-   - Consulting service link
+   - Careers navigation link
 4. **Reports Results**: Provides detailed success/failure reporting
 5. **Cleanup**: Properly closes browser and resources
 
-## 🛠️ Prerequisites
+## 📁 Project Structure
 
-- Node.js 16.0 or higher
-- npm (Node Package Manager)
-- Internet connection
-
-## 📦 Installation & Setup
-
-### Step 1: Clone or Extract Project
-
-Extract the project files to your desired directory.
-
-### Step 2: Navigate to Project Directory
-
-```bash
-cd electricmind_scripts_typescript
+```
+electricmind_playwright_scripts/
+├── electricmind_scripts_python/          # Python implementation
+│   ├── common/
+│   │   └── lib.py                        # Python automation library
+│   ├── settings/
+│   │   └── settings.py                   # Python configuration
+│   ├── Locators/
+│   │   └── locator.yaml                  # Element locators (shared)
+│   ├── main_script.py                    # Python main script
+│   ├── requirements.txt                  # Python dependencies
+│   └── README.md                         # Python-specific instructions
+│
+├── electricmind_scripts_typescript/      # TypeScript implementation
+│   ├── common/
+│   │   └── lib.ts                        # TypeScript automation library
+│   ├── settings/
+│   │   └── settings.ts                   # TypeScript configuration
+│   ├── Locators/
+│   │   └── locator.yaml                  # Element locators (shared)
+│   ├── main_script.ts                    # TypeScript main script
+│   ├── package.json                      # Node.js dependencies
+│   ├── tsconfig.json                     # TypeScript configuration
+│   └── README.md                         # TypeScript-specific instructions
+│
+└── README.md                             # This common guide
 ```
 
-### Step 3: Install Dependencies
+## 🤔 Which Version Should You Choose?
+
+### Python Version
+**Choose Python if:**
+- You're more comfortable with Python syntax
+- Your team primarily uses Python
+- You want to integrate with existing Python testing frameworks
+- You prefer pip and virtual environments
+
+**Prerequisites:**
+- Python 3.7 or higher
+- pip (Python package installer)
+
+### TypeScript Version
+**Choose TypeScript if:**
+- You're more comfortable with JavaScript/TypeScript
+- Your team primarily uses Node.js
+- You want strong typing and modern JavaScript features
+- You prefer npm and Node.js ecosystem
+
+**Prerequisites:**
+- Node.js 16.0 or higher
+- npm (Node Package Manager)
+
+### Both Versions Are Identical In:
+- ✅ Functionality and test coverage
+- ✅ Element validation logic
+- ✅ Error handling and reporting
+- ✅ Browser support (Chromium, Firefox, WebKit)
+- ✅ Configuration options
+
+## 🚀 Quick Start Guide
+
+### Option 1: Python Version
 
 ```bash
-# Install Node.js packages
+# Navigate to Python project
+cd electricmind_scripts_python
+
+# Create virtual environment
+python -m venv playwright_env
+
+# Activate virtual environment
+# On Windows:
+playwright_env\Scripts\activate
+# On macOS/Linux:
+source playwright_env/bin/activate
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Install Playwright browsers
+playwright install chromium
+
+# Run the script
+python main_script.py
+```
+
+### Option 2: TypeScript Version
+
+```bash
+# Navigate to TypeScript project
+cd electricmind_scripts_typescript
+
+# Install dependencies
 npm install
 
 # Install Playwright browsers
 npx playwright install chromium
+
+# Run the script
+npm start
 ```
 
-### Step 4: Verify Installation
-
-```bash
-# Check if Playwright is installed correctly
-npx playwright --version
-
-# Check TypeScript compilation
-npm run build
-```
-
-## 🚀 Execution
-
-### Method 1: Using npm scripts (Recommended)
-
-```bash
-# Build and run the script
-npm run start
-
-# Or run the test command
-npm test
-```
-
-### Method 2: Manual compilation and execution
-
-```bash
-# Compile TypeScript to JavaScript
-npm run build
-
-# Run the compiled JavaScript
-node main_script.js
-```
-
-### Expected Output
+## 📊 Expected Output (Both Versions)
 
 ```
 🚀 Starting Playwright Automation Test for Electric Mind
@@ -108,12 +136,12 @@ Successfully navigated to: https://www.electricmind.com/
 Validating 4 elements...
 
 Validating: What We Do navigation link
-  Locator: div:has-text('What We Do')
+  Locator: div:has-text('What We Do'):not(:has(div))
   Expected text: 'What We Do'
   ✅ SUCCESS: Text matches - 'What We Do'
 
 Validating: Who We Are navigation link
-  Locator: div:has-text('Who We Are')
+  Locator: div:has-text('Who We Are'):not(:has(div))
   Expected text: 'Who We Are'
   ✅ SUCCESS: Text matches - 'Who We Are'
 
@@ -122,10 +150,10 @@ Validating: Contact navigation link
   Expected text: 'Contact'
   ✅ SUCCESS: Text matches - 'Contact'
 
-Validating: Consulting service link
-  Locator: a:has-text('Consulting')
-  Expected text: 'Consulting'
-  ✅ SUCCESS: Text matches - 'Consulting'
+Validating: Careers navigation link
+  Locator: div:has-text('Careers'):not(:has(div))
+  Expected text: 'Careers'
+  ✅ SUCCESS: Text matches - 'Careers'
 
 ==================================================
 🎉 All element validations PASSED!
@@ -142,93 +170,131 @@ Browser closed successfully.
 ✅ Test execution completed.
 ```
 
-## ⚙️ Configuration
+## ⚙️ Configuration (Both Versions)
 
-### Modifying Target URL
+### Changing Target URL
 
-Edit `settings/settings.ts`:
+**Python** (`electricmind_scripts_python/settings/settings.py`):
+```python
+BASEURL = "https://www."
+URL = BASEURL + "your-target-site.com/"
+```
 
+**TypeScript** (`electricmind_scripts_typescript/settings/settings.ts`):
 ```typescript
-// Change the base URL or specific path
 export const BASEURL = "https://www.";
 export const URL = BASEURL + "your-target-site.com/";
 ```
 
 ### Changing Browser
 
-Edit `settings/settings.ts`:
+**Python** (`electricmind_scripts_python/settings/settings.py`):
+```python
+BROWSER = "firefox"  # Options: chromium, firefox, webkit
+```
 
+**TypeScript** (`electricmind_scripts_typescript/settings/settings.ts`):
 ```typescript
-// Options: chromium, firefox, webkit
-export const BROWSER = "firefox";
+export const BROWSER = "firefox"; // Options: chromium, firefox, webkit
 ```
 
 ### Modifying Elements to Test
 
-Edit `Locators/locator.yaml`:
-
+Both versions share the same YAML file (`Locators/locator.yaml`):
 ```yaml
 elements:
   your_element:
-    locator: "text=Your Element Text"
-    expected_text: "Your Element Text"
+    locator: "css=.your-css-selector"
+    expected_text: "Expected Text"
     description: "Description of your element"
 ```
 
 ## 🧪 Running Tests
 
-### Headless Mode
+### Python Commands
+```bash
+# Basic execution
+python main_script.py
 
-To run in headless mode, modify `common/lib.ts`:
-
-```typescript
-// Change headless: false to headless: true
-this.browser = await chromium.launch({ headless: true });
+# With virtual environment
+source playwright_env/bin/activate && python main_script.py
 ```
 
-### Different Browsers
-
-Install additional browsers:
-
+### TypeScript Commands
 ```bash
-# Install Firefox
-npx playwright install firefox
-
-# Install WebKit (Safari)
-npx playwright install webkit
-```
-
-Then update `settings/settings.ts` to use "firefox" or "webkit".
-
-## 📝 Available npm Scripts
-
-```bash
-# Build TypeScript files
-npm run build
-
-# Build and run the script
-npm run start
-
-# Run tests (alias for start)
+# Using npm scripts (recommended)
+npm start
 npm test
 
-# Clean compiled JavaScript files
+# Manual compilation and execution
+npm run build
+node main_script.js
+
+# Clean compiled files
 npm run clean
+```
+
+### Installing Additional Browsers
+
+**Python:**
+```bash
+playwright install firefox
+playwright install webkit
+```
+
+**TypeScript:**
+```bash
+npx playwright install firefox
+npx playwright install webkit
 ```
 
 ## 🐛 Troubleshooting
 
-### Common Issues
+### Common Issues (Both Versions)
 
 1. **Browser not found**
    ```bash
-   # Reinstall browsers
+   # Python
+   playwright install
+   
+   # TypeScript
    npx playwright install
    ```
 
-2. **TypeScript compilation errors**
+2. **Permission errors (Linux/macOS)**
    ```bash
-   # Check TypeScript configuration
+   # Python
+   playwright install-deps
+   
+   # TypeScript
+   npx playwright install-deps
+   ```
+
+3. **Element not found**
+   - Check if website structure has changed
+   - Update locators in `Locators/locator.yaml`
+   - Use browser developer tools to inspect elements
+
+### Python-Specific Issues
+
+4. **Import errors**
+   - Ensure virtual environment is activated
+   - Verify dependencies: `pip list`
+
+5. **Virtual environment issues**
+   ```bash
+   # Recreate virtual environment
+   rm -rf playwright_env
+   python -m venv playwright_env
+   source playwright_env/bin/activate
+   pip install -r requirements.txt
+   ```
+
+### TypeScript-Specific Issues
+
+6. **TypeScript compilation errors**
+   ```bash
+   # Check compilation
    npx tsc --noEmit
    
    # Reinstall dependencies
@@ -236,106 +302,156 @@ npm run clean
    npm install
    ```
 
-3. **Permission errors**
-   ```bash
-   # On Linux/macOS, you might need to install system dependencies
-   npx playwright install-deps
-   ```
+7. **Module not found errors**
+   - Ensure dependencies are installed: `npm list`
+   - Check TypeScript compilation: `npm run build`
 
-4. **Module not found errors**
-   - Ensure all dependencies are installed: `npm list`
-   - Check that TypeScript compilation was successful: `npm run build`
+## 🔧 Advanced Configuration
 
-5. **Element not found**
-   - Check if website structure has changed
-   - Update locators in `Locators/locator.yaml`
-   - Use browser developer tools to inspect elements
+### Headless Mode
 
-### Debug Mode
+**Python** (`electricmind_scripts_python/common/lib.py`):
+```python
+# Change headless=False to headless=True
+self.browser = self.playwright.chromium.launch(headless=True)
+```
 
-For debugging, you can modify the script to add pauses:
-
+**TypeScript** (`electricmind_scripts_typescript/common/lib.ts`):
 ```typescript
-// Add this in main_script.ts after opening URL
-await new Promise(resolve => {
-    console.log("Press Ctrl+C to continue...");
-    process.stdin.once('data', resolve);
-});
+// Change headless: false to headless: true
+this.browser = await chromium.launch({ headless: true });
+```
+
+### Custom Timeouts
+
+**Python** (`electricmind_scripts_python/settings/settings.py`):
+```python
+TIMEOUT = 60000  # 60 seconds
+```
+
+**TypeScript** (`electricmind_scripts_typescript/settings/settings.ts`):
+```typescript
+export const TIMEOUT = 60000; // 60 seconds
+```
+
+### Custom Viewport
+
+**Python** (`electricmind_scripts_python/settings/settings.py`):
+```python
+VIEWPORT = {"width": 1920, "height": 1080}
+```
+
+**TypeScript** (`electricmind_scripts_typescript/settings/settings.ts`):
+```typescript
+export const VIEWPORT = { width: 1920, height: 1080 };
 ```
 
 ## 📝 Customization
 
 ### Adding New Elements
 
-1. Open `Locators/locator.yaml`
+1. Open `Locators/locator.yaml` in either project
 2. Add new element following the existing pattern:
 
 ```yaml
 elements:
   new_element:
-    locator: "css=.your-css-selector"
-    expected_text: "Expected Text"
-    description: "Description of new element"
+    locator: "text=Your Element Text"
+    expected_text: "Your Element Text"
+    description: "Description of your element"
 ```
 
 ### Custom Validation Logic
 
-Modify `common/lib.ts` in the `validateElementFromData` method to add custom validation logic.
+**Python**: Modify `electricmind_scripts_python/common/lib.py` in the `validate_element_from_data` method
 
-## 🔧 Advanced Usage
+**TypeScript**: Modify `electricmind_scripts_typescript/common/lib.ts` in the `validateElementFromData` method
 
-### Running with Different Timeouts
+## 🔍 Element Locators Used
 
-Modify `settings/settings.ts`:
+The following locators have been tested and validated on electricmind.com:
 
-```typescript
-export const TIMEOUT = 60000; // 60 seconds
-```
-
-### Custom Viewport Size
-
-```typescript
-export const VIEWPORT = { width: 1920, height: 1080 };
-```
-
-### TypeScript Development
-
-For development with TypeScript:
-
-```bash
-# Watch mode for automatic compilation
-npx tsc --watch
-
-# Type checking without compilation
-npx tsc --noEmit
-```
+| Element | Locator | Expected Text | Description |
+|---------|---------|---------------|-------------|
+| What We Do | `div:has-text('What We Do'):not(:has(div))` | "What We Do" | Navigation link |
+| Who We Are | `div:has-text('Who We Are'):not(:has(div))` | "Who We Are" | Navigation link |
+| Contact | `a:has-text('Contact')` | "Contact" | Navigation link |
+| Careers | `div:has-text('Careers'):not(:has(div))` | "Careers" | Navigation link |
 
 ## 📊 Exit Codes
 
 - `0`: All tests passed successfully
 - `1`: One or more tests failed or error occurred
 
-## 🔍 Project Dependencies
+## 🔄 Development Workflow
 
-### Runtime Dependencies
-- `@playwright/test`: Playwright testing framework
-- `playwright`: Playwright browser automation
-- `js-yaml`: YAML parsing library
+### For Python Development
+```bash
+# Setup
+cd electricmind_scripts_python
+python -m venv playwright_env
+source playwright_env/bin/activate
+pip install -r requirements.txt
+playwright install chromium
 
-### Development Dependencies
-- `typescript`: TypeScript compiler
-- `@types/node`: Node.js type definitions
-- `@types/js-yaml`: js-yaml type definitions
+# Development cycle
+# 1. Edit code
+# 2. Run tests
+python main_script.py
 
-## 🤝 Support
+# 3. Debug if needed
+# Add breakpoints or print statements
+```
 
-For issues or questions:
-1. Check the troubleshooting section above
-2. Verify all prerequisites are met
-3. Ensure all dependencies are installed correctly
-4. Check TypeScript compilation is successful
+### For TypeScript Development
+```bash
+# Setup
+cd electricmind_scripts_typescript
+npm install
+npx playwright install chromium
+
+# Development cycle
+# 1. Edit TypeScript code
+# 2. Compile and run
+npm start
+
+# 3. Debug if needed
+# Use TypeScript debugging features
+npm run build
+node --inspect main_script.js
+```
+
+## 🤝 Contributing
+
+When modifying either version:
+
+1. **Keep both versions in sync**: If you add features to one version, add them to the other
+2. **Update shared files**: The `locator.yaml` file is shared between both versions
+3. **Test both versions**: Ensure changes work in both Python and TypeScript implementations
+4. **Update documentation**: Update both version-specific READMEs and this common README
 
 ## 📄 License
 
 This project is provided as-is for educational and testing purposes.
+
+## 🆘 Support
+
+For issues or questions:
+
+1. **Check troubleshooting section** above for your specific version
+2. **Verify prerequisites** are met for your chosen version
+3. **Ensure dependencies** are installed correctly
+4. **Check that browsers** are installed via Playwright
+5. **Validate website accessibility** - ensure electricmind.com is reachable
+
+## 🎉 Success Criteria
+
+Both scripts are considered successful when:
+- ✅ All 4 elements are found and validated
+- ✅ Browser opens and navigates to electricmind.com
+- ✅ No errors during execution
+- ✅ Clean browser shutdown
+- ✅ Exit code 0 returned
+
+Choose the version that best fits your development environment and team preferences. Both provide identical functionality and reliability!
 
